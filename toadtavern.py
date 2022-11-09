@@ -107,11 +107,42 @@ while 1:
             print("full")
             print(drinko)
     if green_drink.draw():
-        print("green")
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '01'
+            bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6)
+            bgi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '11'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '21'
+        else:
+            print("full")
+            print(drinko)
     if red_drink.draw():
-        print("red")
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '02'
+            bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
+            bbi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '12'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '22'
+        else:
+            print("full")
+            print(drinko)
     if yellow_drink.draw():
-        print("yellow")
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '03'
+            byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
+                        0.6)
+            byi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '13'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '23'
+        else:
+            print("full")
+            print(drinko)
 
     for event in pygame.event.get():
         if event.type == QUIT:
@@ -130,8 +161,27 @@ while 1:
 
         screen.blit(bl, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
     if drinko['ml'] != ' ':
-        pass
+        if color[drinko['ml']] == 'mb':
+            ml = mb
+        elif color[drinko['ml']] == 'mg':
+            ml = mg
+        elif color[drinko['ml']] == 'mr':
+            ml = mr
+        elif color[drinko['ml']] == 'my':
+            ml = my
+
+        screen.blit(ml, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
     if drinko['tl'] != ' ':
-        pass
+        if drinko['tl'] != ' ':
+            if color[drinko['tl']] == 'tb':
+                tl = tb
+            elif color[drinko['tl']] == 'tg':
+                tl = tg
+            elif color[drinko['tl']] == 'tr':
+                tl = tr
+            elif color[drinko['tl']] == 'ty':
+                tl = ty
+
+            screen.blit(tl, (int(w.current_w / 2) - (w.current_w * 0.17), int(w.current_h / 2) - (w.current_h * 0.29)))
     pygame.display.flip()
 
