@@ -27,11 +27,16 @@ class Click():
         self.rect = self.img.get_rect()
         # position images
         self.rect.topleft = (x, y)
+        self.drag = False
 
     def draw(self):
         mx, my = pygame.mouse.get_pos()
         if self.rect.collidepoint((mx, my)):
-            print("over")
+            if pygame.mouse.get_pressed()[0] == 1 and self.drag == False:
+                self.drag = True
+                print("over")
+            if pygame.mouse.get_pressed()[0] == 0:
+                self.drag = False
         # positioning
         screen.blit(self.img, (self.rect.x, self.rect.y))
 
