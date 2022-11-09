@@ -1,5 +1,5 @@
 # modules
-import time, sys, pygame
+import time, sys, pygame, random
 from pygame.locals import *
 
 # initialisation
@@ -10,6 +10,12 @@ drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}  # drink order: bottom layer (bl), mi
 color = {'00': 'bb', '10': 'mb', '20': 'tb', '01': 'bg', '11': 'mg', '21': 'tg', '02': 'br', '12': 'mr', '22': 'tr',
          '03': 'by', '13': 'my', '23': 'ty'}
 money = 0
+
+# ordering
+order = {'bl': ' ', 'ml': ' ', 'tl': ' '}
+order['bl'] = random.choice(['bb', 'bg', 'br', 'by'])
+order['ml'] = random.choice(['mb', 'mg', 'mr', 'my'])
+order['tl'] = random.choice(['tb', 'tg', 'tr', 'ty'])
 
 # screen/scaling
 w = pygame.display.Info()
@@ -89,6 +95,8 @@ def menu():
 
 
 menu()
+
+moneyCounter = pygame.font.SysFont("monospace", 30)
 
 # menu clickables (buttons)
 cocktail_glass = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), cgi, 0.6)
