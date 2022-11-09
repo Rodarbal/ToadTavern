@@ -5,19 +5,35 @@ from pygame.locals import *
 # initialisation
 pygame.init()
 
+# stats
+do = {} # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
+money = 0
 
 # screen/scaling
 w = pygame.display.Info()
 pygame.display.set_caption("Toad Tavern")
 screen = pygame.display.set_mode((w.current_w, int(w.current_h - (w.current_h*0.08))))
 
-# images
+# images (shortened variable names as they are used commonly)
+cgi = pygame.image.load('assets/image/cg.png')  # cgi = cocktail glass image
+bdi = pygame.image.load('assets/image/0.png')  # bdi = blue drink image
+gdi = pygame.image.load('assets/image/1.PNG')  # gdi = blue drink image
+rdi = pygame.image.load('assets/image/2.png')  # rdi = blue drink image
+ydi = pygame.image.load('assets/image/3.png')  # ydi = blue drink image
 
-# cocktail glass image
-cgi = pygame.image.load('assets/image/cg.png')
-# cg = pygame.transform.scale(cg, (100, 100))
-# screen.blit(cg, (100, 100))
-
+# poured drink images
+bb = pygame.image.load('assets/image/00.png')  # bb = bottom blue
+mb = pygame.image.load('assets/image/10.png')  # mb = middle blue
+tb = pygame.image.load('assets/image/20.png')  # tb = top blue
+bg = pygame.image.load('assets/image/01.png')  # bg = bottom green
+mg = pygame.image.load('assets/image/11.png')  # mg = middle green
+tg = pygame.image.load('assets/image/21.png')  # tg = top green
+br = pygame.image.load('assets/image/02.png')  # br = bottom red
+mr = pygame.image.load('assets/image/12.png')  # mr = middle red
+tr = pygame.image.load('assets/image/22.png')  # tr = top red
+by = pygame.image.load('assets/image/03.png')  # by = bottom yellow
+my = pygame.image.load('assets/image/13.png')  # my = middle yellow
+ty = pygame.image.load('assets/image/23.png')  # ty = top yellow
 # buttons
 
 class Click():
@@ -56,18 +72,34 @@ def menu():
     screen.fill((255, 255, 255))
     pygame.draw.rect(screen, (173, 143, 24), pygame.Rect(0, int(w.current_h - (w.current_h * 0.12) - 67), w.current_w, int(w.current_h - (w.current_h * 0.99))))
     pygame.draw.rect(screen, (224, 209, 146), pygame.Rect(0, int(w.current_h - (w.current_h * 0.12) - 60), w.current_w, int(w.current_h - (w.current_h * 0.88))))
+    pygame.draw.rect(screen, (153, 102, 0), pygame.Rect(int(w.current_w / 2) - (w.current_w * 0.46),
+                                                        int(w.current_h / 2) + (w.current_h * 0.015), int(w.current_w / 2) - (w.current_w * 0.15), 10))
+    pygame.draw.rect(screen, (153, 102, 0), pygame.Rect(int(w.current_w / 2) + (w.current_w * 0.11),
+                                                        int(w.current_h / 2) + (w.current_h * 0.015), int(w.current_w / 2) - (w.current_w * 0.15), 10))
     pygame.display.flip()
 
 
 menu()
 
 # menu clickables (buttons)
-cocktail_glass = Click(int(w.current_w/2), int(w.current_h/2), cgi, 0.35)
+cocktail_glass = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), cgi, 0.6)
+blue_drink = Click(int(w.current_w/2) - (w.current_w * 0.55), int(w.current_h/2) - (w.current_h * 0.30), bdi, 0.6)
+green_drink = Click(int(w.current_w/2) - (w.current_w * 0.30), int(w.current_h/2) - (w.current_h * 0.30), gdi, 0.6)
+red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03) , int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
+yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
 
 # game loop
 while 1:
     if cocktail_glass.draw():
-        print("cg pressed")
+        pass
+    if blue_drink.draw():
+        print("blue")
+    if green_drink.draw():
+        print("green")
+    if red_drink.draw():
+        print("red")
+    if yellow_drink.draw():
+        print("yellow")
 
     for event in pygame.event.get():
         if event.type == QUIT:
