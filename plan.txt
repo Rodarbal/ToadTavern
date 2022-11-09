@@ -1,0 +1,34 @@
+Overview
+
+Order Section (essential):
+    - List of Random NPC Spawn (aim for 5-10 ideal 9 unique)
+    - 4-5 orders each day (2-3 normal 1-2 special)
+    - Randomised orders (in array)
+    - conversation to order and for story
+
+Kitchen (nice extra feature):
+    - drag food items on top of each other (keep in array)
+    - 3-5 food items
+    - grill/fryer
+Bar (essential):
+    - 2-3 different cups
+    - 5-10 drink recipes
+    - cup, pourable liquors(not alchol), 2 garnish (lemon slice, mint(maybe olive))
+    - everything positioned same for each cup
+    1. pour 3 layers (positioned same each layer different colour)
+    2. mix after layer
+    3. garnish after mix
+    4. press serve
+
+End of day screen:
+    - Profit and financial stats
+    - bankrupcy ending
+    - can buy bad options give u extra money contribute to bad ending (shady accountant, Rubbert (eliminates competition), mayor)
+    - produce buying (sustainable and quality more expensive)
+
+Characters:
+    - Eugene: Virgin Reddit nerd
+    - Garey: Spooky
+    - Sir Slithers: fancy british
+    - Ruppert: frog/mafia
+    - Parsly: cute baker flowers
