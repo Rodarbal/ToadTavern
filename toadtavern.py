@@ -6,7 +6,9 @@ from pygame.locals import *
 pygame.init()
 
 # stats
-do = {} # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
+drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}  # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
+color = {'00': 'bb', '10': 'mb', '20': 'tb', '01': 'bg', '11': 'mg', '21': 'tg', '02': 'br', '12': 'mr', '22': 'tr',
+         '03': 'by', '13': 'my', '23': 'ty'}
 money = 0
 
 # screen/scaling
@@ -85,7 +87,7 @@ menu()
 cocktail_glass = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), cgi, 0.6)
 blue_drink = Click(int(w.current_w/2) - (w.current_w * 0.55), int(w.current_h/2) - (w.current_h * 0.30), bdi, 0.6)
 green_drink = Click(int(w.current_w/2) - (w.current_w * 0.30), int(w.current_h/2) - (w.current_h * 0.30), gdi, 0.6)
-red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03) , int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
+red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03), int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
 yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
 
 # game loop
@@ -93,7 +95,17 @@ while 1:
     if cocktail_glass.draw():
         pass
     if blue_drink.draw():
-        print("blue")
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '00'
+            bbi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bb, 0.6)
+            bbi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '10'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '20'
+        else:
+            print("full")
+            print(drinko)
     if green_drink.draw():
         print("green")
     if red_drink.draw():
@@ -106,5 +118,20 @@ while 1:
             pygame.quit()
             sys.exit()
 
+    if drinko['bl'] != ' ':
+        if color[drinko['bl']] == 'bb':
+            bl = bb
+        elif color[drinko['bl']] == 'bg':
+            bl = bg
+        elif color[drinko['bl']] == 'br':
+            bl = br
+        elif color[drinko['bl']] == 'by':
+            bl = by
+
+        screen.blit(bl, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
+    if drinko['ml'] != ' ':
+        pass
+    if drinko['tl'] != ' ':
+        pass
     pygame.display.flip()
 
