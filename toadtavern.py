@@ -36,7 +36,11 @@ tr = pygame.image.load('assets/image/22.png')  # tr = top red
 by = pygame.image.load('assets/image/03.png')  # by = bottom yellow
 my = pygame.image.load('assets/image/13.png')  # my = middle yellow
 ty = pygame.image.load('assets/image/23.png')  # ty = top yellow
+
 # buttons
+upgrade = pygame.image.load('assets/image/upgrade.PNG')
+serve = pygame.image.load('assets/image/button.png')
+back = pygame.image.load('assets/image/back.PNG')
 
 class Click():
     def __init__(self, x, y, img, sf):
@@ -69,6 +73,9 @@ class Click():
         return do
 
 # menu
+upgradeimage = Click(int(w.current_w/2) - (w.current_w * 0.057), int(w.current_h/2) + (w.current_h * 0.3), upgrade, 0.8)
+backimage = Click(int(w.current_w/2) - (w.current_w * 0.057), int(w.current_h/2) + (w.current_h * 0.3), back, 0.8)
+
 # menu background
 def menu():
     screen.fill((255, 255, 255))
@@ -89,6 +96,7 @@ blue_drink = Click(int(w.current_w/2) - (w.current_w * 0.55), int(w.current_h/2)
 green_drink = Click(int(w.current_w/2) - (w.current_w * 0.30), int(w.current_h/2) - (w.current_h * 0.30), gdi, 0.6)
 red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03), int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
 yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
+serve = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
 
 # game loop
 while 1:
@@ -103,6 +111,7 @@ while 1:
             drinko['ml'] = '10'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '20'
+            serve.draw()
         else:
             print("full")
             print(drinko)
@@ -115,6 +124,7 @@ while 1:
             drinko['ml'] = '11'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '21'
+            serve.draw()
         else:
             print("full")
             print(drinko)
@@ -122,11 +132,11 @@ while 1:
         if drinko['bl'] == ' ':
             drinko['bl'] = '02'
             bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
-            bbi.draw()
         elif drinko['ml'] == ' ':
             drinko['ml'] = '12'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '22'
+            serve.draw()
         else:
             print("full")
             print(drinko)
@@ -140,10 +150,12 @@ while 1:
             drinko['ml'] = '13'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '23'
+            serve.draw()
         else:
             print("full")
             print(drinko)
-
+    if upgradeimage.draw():
+        pass
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
