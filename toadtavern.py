@@ -121,9 +121,8 @@ def displayMoney(x, y):
     pygame.display.flip()
 
 def displayOrder(x, y):
-    orderText = orderFont.render("{} ({}, {} and {})".format(random.choice(['Parsley Mojito', 'Pond Water', 'Sparkling Snake Venom', 'Croak & Vodka', 'Steaming Swamp'], )), True, (0, 0, 0))
+    orderText = orderFont.render("{} ({}, {} and {})".format(random.choice(['Parsley Mojito', 'Pond Water', 'Sparkling Snake Venom', 'Croak & Vodka', ' Hops On The Beach']), colorconverter[orderValue[0]], colorconverter[orderValue[1]], colorconverter[orderValue[2]]), True, (0, 0, 0))
     time.sleep(1)
-    menu()
     screen.blit(orderText, (x, y))
     pygame.display.flip()
 
@@ -137,6 +136,7 @@ serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current
 serveActive = False
 
 displayMoney(textX, textY)
+displayOrder(orderX, orderY)
 
 # game loop
 while 1:
@@ -160,7 +160,6 @@ while 1:
             drinko['bl'] = '01'
             #bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6) unneccacary
             #bgi.draw()
-            displayMoney(textX, textY)
         elif drinko['ml'] == ' ':
             drinko['ml'] = '11'
         elif drinko['tl'] == ' ':
@@ -202,6 +201,7 @@ while 1:
             if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
                 moneyValue += 10
                 displayMoney(textX, textY)
+                displayOrder(orderX, orderY)
                 getorders()
                 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
                 serveActive = False
@@ -209,6 +209,7 @@ while 1:
             else:
                 moneyValue -= 10
                 displayMoney(textX, textY)
+                displayOrder(orderX, orderY)
                 getorders()
                 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
                 serveActive = False
