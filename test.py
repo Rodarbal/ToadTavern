@@ -54,7 +54,7 @@ start_button = Button(100, 200, start_img, 0.1)
 #game loop
 run = True
 while run:
-    screen.fill((202, 228, 241))
+    screen.fill((255, 255, 255))
     pos = pygame.mouse.get_pos()
     mx,my = pygame.mouse.get_pos()
 
@@ -78,7 +78,7 @@ while run:
                 display.flip()
         elif event.type == MOUSEMOTION:
             x, y = event.pos
-            print(x + " " + y)
+            #print(x + " " + y)
     pygame.display.update()
 
 pygame.quit()

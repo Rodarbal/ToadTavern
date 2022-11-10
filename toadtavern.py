@@ -116,7 +116,7 @@ menu()
 shelves()
 
 # money and order display
-moneyValue = 100
+moneyValue = 0
 moneyFont = pygame.font.SysFont("monospace", 30)
 textX = 10
 textY = 10
