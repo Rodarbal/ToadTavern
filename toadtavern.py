@@ -70,7 +70,7 @@ class Click():
                 self.drag = True
                 do = True
 
-            # working drag (implement fully if time allows)
+            # working drag (implement fully if time allows) (did not allow)
             #if self.drag == True:
             #    mx, my = pygame.mouse.get_pos()
             #    self.rect.center = (mx, my)
@@ -117,14 +117,14 @@ def displayMoney(x, y):
     moneyText = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
     time.sleep(1)
     menu()
-    screen.blit(money, (x, y))
+    screen.blit(moneyText, (x, y))
     pygame.display.flip()
 
 def displayOrder(x, y):
-    orderTexr = orderFont.render("{} ({}, {} and {})".format(str(moneyValue)), True, (0, 0, 0))
+    orderText = orderFont.render("{} ({}, {} and {})".format(random.choice(['Parsley Mojito', 'Pond Water', 'Sparkling Snake Venom', 'Croak & Vodka', 'Steaming Swamp'], )), True, (0, 0, 0))
     time.sleep(1)
     menu()
-    screen.blit(money, (x, y))
+    screen.blit(orderText, (x, y))
     pygame.display.flip()
 
 # menu clickables (buttons)
