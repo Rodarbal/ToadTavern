@@ -96,6 +96,13 @@ def menu():
 
 menu()
 
+def things_dodged(count):
+    font = pygame.font.SysFont(None, 25)
+    text = font.render(str(money), True, (0,0,0))
+    screen.blit(text, (0, 0))
+    #moneyCounterText = moneyCounter.render(str(money), True, (0, 0, 0))
+    #screen.blit(moneyCounterText, (100, 100))
+
 moneyCounter = pygame.font.SysFont("monospace", 30)
 
 # menu clickables (buttons)
@@ -154,6 +161,7 @@ while 1:
             byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
                         0.6)
             byi.draw()
+            money += 10
         elif drinko['ml'] == ' ':
             drinko['ml'] = '13'
         elif drinko['tl'] == ' ':
@@ -164,10 +172,6 @@ while 1:
             print(drinko)
     if upgradeimage.draw():
         pass
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            pygame.quit()
-            sys.exit()
 
     if drinko['bl'] != ' ':
         if color[drinko['bl']] == 'bb':
@@ -201,7 +205,14 @@ while 1:
                 tl = tr
             elif color[drinko['tl']] == 'ty':
                 tl = ty
-
             screen.blit(tl, (int(w.current_w / 2) - (w.current_w * 0.17), int(w.current_h / 2) - (w.current_h * 0.29)))
+
+    time.sleep(1)
+    money += 1
+    things_dodged(money)
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
     pygame.display.flip()
 
