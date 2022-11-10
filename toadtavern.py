@@ -144,8 +144,9 @@ yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/
 serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
 back_button = Click(int(w.current_w/2) - (w.current_w * 0.057), int(w.current_h/2) + (w.current_h * 0.3), back, 0.8)
 serveActive = False
-mainmenu = True
 upgrademenu = False
+mainmenu = True
+
 
 displayMoney(textX, textY)
 
@@ -164,7 +165,7 @@ while 1:
                 sys.exit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_w:
-                    print("w")
+                    print("x")
                     menu()
                     shelves()
         pygame.display.update()
@@ -224,8 +225,8 @@ while 1:
                 print("full")
                 print(drinko)
         if upgradeimage.draw():
-            upgrademenu = True
             mainmenu = False
+            upgrademenu = True
             menu()
         if serveActive:
             if serve_button.draw():
