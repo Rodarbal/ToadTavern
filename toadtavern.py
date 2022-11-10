@@ -5,17 +5,17 @@ from pygame.locals import *
 # initialisation
 pygame.init()
 
-# stats
+# drinks
 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}  # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
 color = {'00': 'bb', '10': 'mb', '20': 'tb', '01': 'bg', '11': 'mg', '21': 'tg', '02': 'br', '12': 'mr', '22': 'tr',
          '03': 'by', '13': 'my', '23': 'ty'}
-money = 0
 
 # ordering
 order = {'bl': ' ', 'ml': ' ', 'tl': ' '}
 order['bl'] = random.choice(['bb', 'bg', 'br', 'by'])
 order['ml'] = random.choice(['mb', 'mg', 'mr', 'my'])
 order['tl'] = random.choice(['tb', 'tg', 'tr', 'ty'])
+print(order)
 
 # screen/scaling
 w = pygame.display.Info()
@@ -96,14 +96,20 @@ def menu():
 
 menu()
 
-def things_dodged(count):
-    font = pygame.font.SysFont(None, 25)
-    text = font.render(str(money), True, (0,0,0))
-    screen.blit(text, (0, 0))
-    #moneyCounterText = moneyCounter.render(str(money), True, (0, 0, 0))
-    #screen.blit(moneyCounterText, (100, 100))
 
-moneyCounter = pygame.font.SysFont("monospace", 30)
+# money
+moneyValue = 0
+moneyFont = pygame.font.SysFont("monospace", 30)
+textX = 10
+textY = 10
+
+
+def displayMoney(x, y):
+    money = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
+    time.sleep(1)
+    menu()
+    screen.blit(money, (x, y))
+    pygame.display.flip()
 
 # menu clickables (buttons)
 cocktail_glass = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), cgi, 0.6)
@@ -111,7 +117,9 @@ blue_drink = Click(int(w.current_w/2) - (w.current_w * 0.55), int(w.current_h/2)
 green_drink = Click(int(w.current_w/2) - (w.current_w * 0.30), int(w.current_h/2) - (w.current_h * 0.30), gdi, 0.6)
 red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03), int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
 yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
-serve = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
+serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
+
+displayMoney(textX, textY)
 
 # game loop
 while 1:
@@ -126,7 +134,7 @@ while 1:
             drinko['ml'] = '10'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '20'
-            serve.draw()
+            #serve_button.draw()
         else:
             print("full")
             print(drinko)
@@ -135,6 +143,8 @@ while 1:
             drinko['bl'] = '01'
             bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6)
             bgi.draw()
+            moneyValue += 1
+            displayMoney(textX, textY)
         elif drinko['ml'] == ' ':
             drinko['ml'] = '11'
         elif drinko['tl'] == ' ':
@@ -161,7 +171,6 @@ while 1:
             byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
                         0.6)
             byi.draw()
-            money += 10
         elif drinko['ml'] == ' ':
             drinko['ml'] = '13'
         elif drinko['tl'] == ' ':
@@ -193,8 +202,8 @@ while 1:
             ml = mr
         elif color[drinko['ml']] == 'my':
             ml = my
-
         screen.blit(ml, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
+
     if drinko['tl'] != ' ':
         if drinko['tl'] != ' ':
             if color[drinko['tl']] == 'tb':
@@ -207,12 +216,13 @@ while 1:
                 tl = ty
             screen.blit(tl, (int(w.current_w / 2) - (w.current_w * 0.17), int(w.current_h / 2) - (w.current_h * 0.29)))
 
-    time.sleep(1)
-    money += 1
-    things_dodged(money)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-    pygame.display.flip()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                print("w")
+                menu()
+    pygame.display.update()
 
