@@ -21,6 +21,7 @@ def getorders():
     print(order)
 
 getorders()
+orderValue = [order['bl'], order['ml'], order['tl']]
 
 # screen/scaling
 w = pygame.display.Info()
@@ -108,23 +109,25 @@ moneyFont = pygame.font.SysFont("monospace", 30)
 textX = 10
 textY = 10
 
-orderValue = [order['bl'], order['ml'], order['tl']]
+# orderValue = [order['bl'], order['ml'], order['tl']]
 orderFont = pygame.font.SysFont("monospace", 30)
 orderX = 300
 orderY = 10
-
-def displayMoney(x, y):
-    moneyText = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
-    time.sleep(1)
-    menu()
-    screen.blit(moneyText, (x, y))
-    pygame.display.flip()
 
 def displayOrder(x, y):
     orderText = orderFont.render("{} ({}, {} and {})".format(random.choice(['Parsley Mojito', 'Pond Water', 'Sparkling Snake Venom', 'Croak & Vodka', ' Hops On The Beach']), colorconverter[orderValue[0]], colorconverter[orderValue[1]], colorconverter[orderValue[2]]), True, (0, 0, 0))
     time.sleep(1)
     screen.blit(orderText, (x, y))
     pygame.display.flip()
+
+def displayMoney(x, y):
+    moneyText = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
+    time.sleep(1)
+    menu()
+    displayOrder(orderX, orderY)
+    screen.blit(moneyText, (x, y))
+    pygame.display.flip()
+
 
 # menu clickables (buttons)
 cocktail_glass = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), cgi, 0.6)
@@ -136,7 +139,7 @@ serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current
 serveActive = False
 
 displayMoney(textX, textY)
-displayOrder(orderX, orderY)
+
 
 # game loop
 while 1:
@@ -200,17 +203,19 @@ while 1:
         if serve_button.draw():
             if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
                 moneyValue += 10
-                displayMoney(textX, textY)
-                displayOrder(orderX, orderY)
                 getorders()
+                orderValue = [order['bl'], order['ml'], order['tl']]
+                displayOrder(orderX, orderY)
+                displayMoney(textX, textY)
                 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
                 serveActive = False
 
             else:
                 moneyValue -= 10
-                displayMoney(textX, textY)
-                displayOrder(orderX, orderY)
                 getorders()
+                orderValue = [order['bl'], order['ml'], order['tl']]
+                displayOrder(orderX, orderY)
+                displayMoney(textX, textY)
                 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
                 serveActive = False
     if drinko['bl'] != ' ':
