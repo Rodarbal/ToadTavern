@@ -113,7 +113,6 @@ moneyValue = 0
 moneyFont = pygame.font.SysFont("monospace", 30)
 textX = 10
 textY = 10
-
 # orderValue = [order['bl'], order['ml'], order['tl']]
 orderFont = pygame.font.SysFont("monospace", 30)
 orderX = 300
@@ -121,13 +120,13 @@ orderY = 10
 
 def displayOrder(x, y):
     orderText = orderFont.render("{} ({}, {} and {})".format(random.choice(['Parsley Mojito', 'Pond Water', 'Sparkling Snake Venom', 'Croak & Vodka', ' Hops On The Beach']), colorconverter[orderValue[0]], colorconverter[orderValue[1]], colorconverter[orderValue[2]]), True, (0, 0, 0))
-    time.sleep(1)
+    #time.sleep(1)
     screen.blit(orderText, (x, y))
     pygame.display.flip()
 
 def displayMoney(x, y):
     moneyText = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
-    time.sleep(1)
+    #time.sleep(1)
     menu()
     shelves()
     displayOrder(orderX, orderY)
@@ -153,141 +152,141 @@ displayMoney(textX, textY)
 
 # game loop
 while 1:
-    while upgrademenu:
-        if back_button.draw():
-            mainmenu = True
-            upgrademenu = False
-            menu()
-            shelves()
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    print("x")
-                    menu()
-                    shelves()
-        pygame.display.update()
-    while mainmenu:
-        if cocktail_glass.draw():
-            pass
-        if blue_drink.draw():
-            if drinko['bl'] == ' ':
-                drinko['bl'] = '00'
-                #bbi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bb, 0.6)
-                #bbi.draw()
-            elif drinko['ml'] == ' ':
-                drinko['ml'] = '10'
-            elif drinko['tl'] == ' ':
-                drinko['tl'] = '20'
-                serveActive = True
-            else:
-                print("full")
-                print(drinko)
-        if green_drink.draw():
-            if drinko['bl'] == ' ':
-                drinko['bl'] = '01'
-                #bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6) unneccacary
-                #bgi.draw()
-            elif drinko['ml'] == ' ':
-                drinko['ml'] = '11'
-            elif drinko['tl'] == ' ':
-                drinko['tl'] = '21'
-                serveActive = True
-            else:
-                print("full")
-                print(drinko)
-        if red_drink.draw():
-            if drinko['bl'] == ' ':
-                drinko['bl'] = '02'
-                #bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
-            elif drinko['ml'] == ' ':
-                drinko['ml'] = '12'
-            elif drinko['tl'] == ' ':
-                drinko['tl'] = '22'
-                serveActive = True
-            else:
-                print("full")
-                print(drinko)
-        if yellow_drink.draw():
-            if drinko['bl'] == ' ':
-                drinko['bl'] = '03'
-                #byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
-                #            0.6)
-                #byi.draw()
-            elif drinko['ml'] == ' ':
-                drinko['ml'] = '13'
-            elif drinko['tl'] == ' ':
-                drinko['tl'] = '23'
-                serveActive = True
-            else:
-                print("full")
-                print(drinko)
-        if upgradeimage.draw():
-            mainmenu = False
-            upgrademenu = True
-            menu()
-        if serveActive:
-            if serve_button.draw():
-                if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
-                    moneyValue += 10
-                    getorders()
-                    orderValue = [order['bl'], order['ml'], order['tl']]
-                    displayOrder(orderX, orderY)
-                    displayMoney(textX, textY)
-                    drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
-                    serveActive = False
+    if cocktail_glass.draw():
+        pass
+    if blue_drink.draw():
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '00'
+            #bbi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bb, 0.6)
+            #bbi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '10'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '20'
+            serveActive = True
+        else:
+            print("full")
+            print(drinko)
+    if green_drink.draw():
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '01'
+            #bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6) unneccacary
+            #bgi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '11'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '21'
+            serveActive = True
+        else:
+            print("full")
+            print(drinko)
+    if red_drink.draw():
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '02'
+            #bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '12'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '22'
+            serveActive = True
+        else:
+            print("full")
+            print(drinko)
+    if yellow_drink.draw():
+        if drinko['bl'] == ' ':
+            drinko['bl'] = '03'
+            #byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
+            #            0.6)
+            #byi.draw()
+        elif drinko['ml'] == ' ':
+            drinko['ml'] = '13'
+        elif drinko['tl'] == ' ':
+            drinko['tl'] = '23'
+            serveActive = True
+        else:
+            print("full")
+            print(drinko)
+    # if upgradeimage.draw():
+    #     mainmenu = False
+    #     menu()
+    #     pygame.display.update()
+    #     upgrademenu = True
+    if serveActive:
+        if serve_button.draw():
+            if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
+                moneyValue += 10
+                getorders()
+                orderValue = [order['bl'], order['ml'], order['tl']]
+                displayOrder(orderX, orderY)
+                displayMoney(textX, textY)
+                drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
+                serveActive = False
 
-                else:
-                    moneyValue -= 10
-                    getorders()
-                    orderValue = [order['bl'], order['ml'], order['tl']]
-                    displayOrder(orderX, orderY)
-                    displayMoney(textX, textY)
-                    drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
-                    serveActive = False
-        if drinko['bl'] != ' ':
-            if color[drinko['bl']] == 'bb':
-                bl = bb
-            elif color[drinko['bl']] == 'bg':
-                bl = bg
-            elif color[drinko['bl']] == 'br':
-                bl = br
-            elif color[drinko['bl']] == 'by':
-                bl = by
+            else:
+                moneyValue -= 10
+                getorders()
+                orderValue = [order['bl'], order['ml'], order['tl']]
+                displayOrder(orderX, orderY)
+                displayMoney(textX, textY)
+                drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
+                serveActive = False
+    if drinko['bl'] != ' ':
+        if color[drinko['bl']] == 'bb':
+            bl = bb
+        elif color[drinko['bl']] == 'bg':
+            bl = bg
+        elif color[drinko['bl']] == 'br':
+            bl = br
+        elif color[drinko['bl']] == 'by':
+            bl = by
 
-            screen.blit(bl, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
-        if drinko['ml'] != ' ':
-            if color[drinko['ml']] == 'mb':
-                ml = mb
-            elif color[drinko['ml']] == 'mg':
-                ml = mg
-            elif color[drinko['ml']] == 'mr':
-                ml = mr
-            elif color[drinko['ml']] == 'my':
-                ml = my
-            screen.blit(ml, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
+        screen.blit(bl, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
+    if drinko['ml'] != ' ':
+        if color[drinko['ml']] == 'mb':
+            ml = mb
+        elif color[drinko['ml']] == 'mg':
+            ml = mg
+        elif color[drinko['ml']] == 'mr':
+            ml = mr
+        elif color[drinko['ml']] == 'my':
+            ml = my
+        screen.blit(ml, (int(w.current_w/2) - (w.current_w * 0.17), int(w.current_h/2) - (w.current_h * 0.29)))
 
+    if drinko['tl'] != ' ':
         if drinko['tl'] != ' ':
-            if drinko['tl'] != ' ':
-                if color[drinko['tl']] == 'tb':
-                    tl = tb
-                elif color[drinko['tl']] == 'tg':
-                    tl = tg
-                elif color[drinko['tl']] == 'tr':
-                    tl = tr
-                elif color[drinko['tl']] == 'ty':
-                    tl = ty
-                screen.blit(tl, (int(w.current_w / 2) - (w.current_w * 0.17), int(w.current_h / 2) - (w.current_h * 0.29)))
+            if color[drinko['tl']] == 'tb':
+                tl = tb
+            elif color[drinko['tl']] == 'tg':
+                tl = tg
+            elif color[drinko['tl']] == 'tr':
+                tl = tr
+            elif color[drinko['tl']] == 'ty':
+                tl = ty
+            screen.blit(tl, (int(w.current_w / 2) - (w.current_w * 0.17), int(w.current_h / 2) - (w.current_h * 0.29)))
 
-        for event in pygame.event.get():
-            if event.type == QUIT:
-                pygame.quit()
-                sys.exit()
-            if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_w:
-                    print("w")
-                    menu()
-        pygame.display.update()
-
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            pygame.quit()
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:
+                print("w")
+                menu()
+    pygame.display.update()
+    # elif upgrademenu:
+    #     if back_button.draw():
+    #         mainmenu = True
+    #         upgrademenu = False
+    #         menu()
+    #         shelves()
+    #         pygame.display.flip()
+    #     for event in pygame.event.get():
+    #         if event.type == QUIT:
+    #             pygame.quit()
+    #             sys.exit()
+    #         if event.type == pygame.KEYDOWN:
+    #             if event.key == pygame.K_w:
+    #                 print("x")
+    #                 menu()
+    #                 shelves()
+    #     pygame.display.update()
