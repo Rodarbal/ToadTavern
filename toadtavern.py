@@ -118,6 +118,7 @@ green_drink = Click(int(w.current_w/2) - (w.current_w * 0.30), int(w.current_h/2
 red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03), int(w.current_h/2) - (w.current_h * 0.30), rdi, 0.6)
 yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
 serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
+serveActive = False
 
 displayMoney(textX, textY)
 
@@ -128,60 +129,66 @@ while 1:
     if blue_drink.draw():
         if drinko['bl'] == ' ':
             drinko['bl'] = '00'
-            bbi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bb, 0.6)
-            bbi.draw()
+            #bbi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bb, 0.6)
+            #bbi.draw()
         elif drinko['ml'] == ' ':
             drinko['ml'] = '10'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '20'
-            #serve_button.draw()
+            serveActive = True
         else:
             print("full")
             print(drinko)
     if green_drink.draw():
         if drinko['bl'] == ' ':
             drinko['bl'] = '01'
-            bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6)
-            bgi.draw()
-            moneyValue += 1
+            #bgi = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), bg, 0.6) unneccacary
+            #bgi.draw()
             displayMoney(textX, textY)
         elif drinko['ml'] == ' ':
             drinko['ml'] = '11'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '21'
-            serve.draw()
+            serveActive = True
         else:
             print("full")
             print(drinko)
     if red_drink.draw():
         if drinko['bl'] == ' ':
             drinko['bl'] = '02'
-            bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
+            #bri = Click(int(w.current_w/2) - (w.current_w * 0.10), int(w.current_h/2) - (w.current_h * 0.17), br, 0.6)
         elif drinko['ml'] == ' ':
             drinko['ml'] = '12'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '22'
-            serve.draw()
+            serveActive = True
         else:
             print("full")
             print(drinko)
     if yellow_drink.draw():
         if drinko['bl'] == ' ':
             drinko['bl'] = '03'
-            byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
-                        0.6)
-            byi.draw()
+            #byi = Click(int(w.current_w / 2) - (w.current_w * 0.10), int(w.current_h / 2) - (w.current_h * 0.17), by,
+            #            0.6)
+            #byi.draw()
         elif drinko['ml'] == ' ':
             drinko['ml'] = '13'
         elif drinko['tl'] == ' ':
             drinko['tl'] = '23'
-            serve.draw()
+            serveActive = True
         else:
             print("full")
             print(drinko)
     if upgradeimage.draw():
         pass
-
+    if serveActive:
+        if serve_button.draw():
+            if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
+                moneyValue += 10
+                displayMoney(textX, textY)
+            else:
+                moneyValue -= 10
+                displayMoney(textX, textY)
     if drinko['bl'] != ' ':
         if color[drinko['bl']] == 'bb':
             bl = bb
