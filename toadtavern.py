@@ -5,6 +5,10 @@ from pygame.locals import *
 # initialisation
 pygame.init()
 
+# upgrades
+fc = 1
+dm = 1
+
 # drinks
 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}  # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
 color = {'00': 'bb', '10': 'mb', '20': 'tb', '01': 'bg', '11': 'mg', '21': 'tg', '02': 'br', '12': 'mr', '22': 'tr',
@@ -48,6 +52,9 @@ tr = pygame.image.load('assets/image/22.png')  # tr = top red
 by = pygame.image.load('assets/image/03.png')  # by = bottom yellow
 my = pygame.image.load('assets/image/13.png')  # my = middle yellow
 ty = pygame.image.load('assets/image/23.png')  # ty = top yellow
+title = pygame.image.load('assets/image/title.PNG')
+ingredients = pygame.image.load('assets/image/ing.PNG')
+foodbin = pygame.image.load('assets/image/foodbin.PNG')
 
 # buttons
 upgrade = pygame.image.load('assets/image/upgrade.PNG')
@@ -109,13 +116,13 @@ menu()
 shelves()
 
 # money and order display
-moneyValue = 0
+moneyValue = 100
 moneyFont = pygame.font.SysFont("monospace", 30)
 textX = 10
 textY = 10
 # orderValue = [order['bl'], order['ml'], order['tl']]
 orderFont = pygame.font.SysFont("monospace", 30)
-orderX = 300
+orderX = int(w.current_w / 2) - (int(w.current_w / 2) * 0.45)
 orderY = 10
 
 def displayOrder(x, y):
@@ -142,9 +149,14 @@ red_drink = Click(int(w.current_w/2) + (w.current_w * 0.03), int(w.current_h/2) 
 yellow_drink = Click(int(w.current_w/2) + (w.current_w * 0.27), int(w.current_h/2) - (w.current_h * 0.30), ydi, 0.6)
 serve_button = Click(int(w.current_w / 2) - (w.current_w * 0.073), int(w.current_h / 2) - (w.current_h * 0.43), serve, 0.3)
 back_button = Click(int(w.current_w/2) - (w.current_w * 0.057), int(w.current_h/2) + (w.current_h * 0.3), back, 0.8)
+title_img = Click(int(w.current_w/2) - (w.current_w * 0.45), int(w.current_h/2) + (w.current_h * 0.207), title, 0.6)
+foodbin_img = Click(int(w.current_w/2) - (w.current_w * 0.21), int(w.current_h/2) + (w.current_h * 0.3), foodbin, 0.6)
+ingredients_img = Click(int(w.current_w/2) + (w.current_w * 0.05), int(w.current_h/2) + (w.current_h * 0.3), ingredients, 0.6)
 serveActive = False
 upgrademenu = False
 mainmenu = True
+fbu = True
+liu = True
 
 
 displayMoney(textX, textY)
@@ -152,8 +164,23 @@ displayMoney(textX, textY)
 
 # game loop
 while 1:
+    title_img.draw()
     if cocktail_glass.draw():
         pass
+    if fbu:
+        if foodbin_img.draw():
+            if moneyValue >= 20:
+                moneyValue -= 20
+                fc = 0
+                displayMoney(textX, textY)
+                fbu = False
+    if liu:
+        if ingredients_img.draw():
+            if moneyValue >= 50:
+                moneyValue -= 50
+                dm = 1.5
+                displayMoney(textX, textY)
+                liu = False
     if blue_drink.draw():
         if drinko['bl'] == ' ':
             drinko['bl'] = '00'
@@ -214,7 +241,7 @@ while 1:
     if serveActive:
         if serve_button.draw():
             if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
-                moneyValue += 10
+                moneyValue += 10 * dm
                 getorders()
                 orderValue = [order['bl'], order['ml'], order['tl']]
                 displayOrder(orderX, orderY)
@@ -223,7 +250,7 @@ while 1:
                 serveActive = False
 
             else:
-                moneyValue -= 10
+                moneyValue -= 10 * fc
                 getorders()
                 orderValue = [order['bl'], order['ml'], order['tl']]
                 displayOrder(orderX, orderY)
