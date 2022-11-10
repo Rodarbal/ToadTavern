@@ -9,13 +9,18 @@ pygame.init()
 drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}  # drink order: bottom layer (bl), middle layer (ml), top layer (tp)
 color = {'00': 'bb', '10': 'mb', '20': 'tb', '01': 'bg', '11': 'mg', '21': 'tg', '02': 'br', '12': 'mr', '22': 'tr',
          '03': 'by', '13': 'my', '23': 'ty'}
+colorconverter = {'bb': 'blue', 'mb': 'blue', 'tb': 'blue', 'bg': 'green', 'mg': 'green',  'tg': 'green',
+                  'br': 'red', 'mr': 'red', 'tr': 'red', 'by': 'yellow', 'my': 'yellow', 'ty': 'yellow'}
 
 # ordering
 order = {'bl': ' ', 'ml': ' ', 'tl': ' '}
-order['bl'] = random.choice(['bb', 'bg', 'br', 'by'])
-order['ml'] = random.choice(['mb', 'mg', 'mr', 'my'])
-order['tl'] = random.choice(['tb', 'tg', 'tr', 'ty'])
-print(order)
+def getorders():
+    order['bl'] = random.choice(['bb', 'bg', 'br', 'by'])
+    order['ml'] = random.choice(['mb', 'mg', 'mr', 'my'])
+    order['tl'] = random.choice(['tb', 'tg', 'tr', 'ty'])
+    print(order)
+
+getorders()
 
 # screen/scaling
 w = pygame.display.Info()
@@ -97,15 +102,26 @@ def menu():
 menu()
 
 
-# money
+# money and order display
 moneyValue = 0
 moneyFont = pygame.font.SysFont("monospace", 30)
 textX = 10
 textY = 10
 
+orderValue = [order['bl'], order['ml'], order['tl']]
+orderFont = pygame.font.SysFont("monospace", 30)
+orderX = 300
+orderY = 10
 
 def displayMoney(x, y):
-    money = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
+    moneyText = moneyFont.render("Money: ${}".format(str(moneyValue)), True, (0, 0, 0))
+    time.sleep(1)
+    menu()
+    screen.blit(money, (x, y))
+    pygame.display.flip()
+
+def displayOrder(x, y):
+    orderTexr = orderFont.render("{} ({}, {} and {})".format(str(moneyValue)), True, (0, 0, 0))
     time.sleep(1)
     menu()
     screen.blit(money, (x, y))
@@ -186,9 +202,16 @@ while 1:
             if order['tl'] == color[drinko['tl']] and order['ml'] == color[drinko['ml']] and order['bl'] == color[drinko['bl']]:
                 moneyValue += 10
                 displayMoney(textX, textY)
+                getorders()
+                drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
+                serveActive = False
+
             else:
                 moneyValue -= 10
                 displayMoney(textX, textY)
+                getorders()
+                drinko = {'bl': ' ', 'ml': ' ', 'tl': ' '}
+                serveActive = False
     if drinko['bl'] != ' ':
         if color[drinko['bl']] == 'bb':
             bl = bb
